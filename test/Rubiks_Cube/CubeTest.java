@@ -58,4 +58,12 @@ public class CubeTest {
     public void testException() {
         actual.sides[10].flip(Direction.CONTRACLOCKWISE);
     }
+    @Test
+    public void testCube() {
+        actual.sides[2].flip(Direction.CONTRACLOCKWISE);
+        actual.turnCubeForward();
+        actual.turnCubeBackward();
+        actual.sides[2].flip(Direction.CLOCKWISE);
+        assertEquals(expected, actual);
+    }
 }
