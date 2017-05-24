@@ -18,8 +18,8 @@ public class CubeTest {
     }
     @Test
     public void testFlipMiddleLine() {
-        actual.sides[1].flip(Direction.CONTRACLOCKWISE);
-        actual.sides[1].flip(Direction.CLOCKWISE);
+        actual.getSide(Sides.FORWARD).flip(Direction.CONTRACLOCKWISE);
+        actual.getSide(Sides.FORWARD).flip(Direction.CLOCKWISE);
         assertEquals(expected, actual);
     }
     @Test
@@ -38,32 +38,54 @@ public class CubeTest {
     }
     @Test
     public void testFlipCubeAround() {
-        actual.sides[2].flipCubeAround();
-        actual.sides[2].flipCubeAround();
-        actual.sides[2].flipCubeAround();
-        System.out.println(actual);
-        actual.sides[2].flipCubeAround();
-        System.out.println(actual);
+        actual.getSide(Sides.RIGHT).flipCubeAround();
+        actual.getSide(Sides.RIGHT).flipCubeAround();
+        actual.getSide(Sides.RIGHT).flipCubeAround();
+        actual.getSide(Sides.RIGHT).flipCubeAround();
         assertEquals(expected, actual);
     }
     @Test
     public void testFlip() {
-        actual.sides[0].flip(Direction.CLOCKWISE);
-        actual.sides[3].flip(Direction.CONTRACLOCKWISE);
-        actual.sides[3].flip(Direction.CLOCKWISE);
-        actual.sides[0].flip(Direction.CONTRACLOCKWISE);
+        actual.getSide(Sides.TOP).flip(Direction.CLOCKWISE);
+        actual.getSide(Sides.BACKWARD).flip(Direction.CONTRACLOCKWISE);
+        actual.getSide(Sides.BACKWARD).flip(Direction.CLOCKWISE);
+        actual.getSide(Sides.TOP).flip(Direction.CONTRACLOCKWISE);
         assertEquals(expected, actual);
-    }
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testException() {
-        actual.sides[10].flip(Direction.CONTRACLOCKWISE);
     }
     @Test
     public void testCube() {
-        actual.sides[2].flip(Direction.CONTRACLOCKWISE);
+        actual.getSide(Sides.RIGHT).flip(Direction.CONTRACLOCKWISE);
         actual.turnCubeForward();
         actual.turnCubeBackward();
-        actual.sides[2].flip(Direction.CLOCKWISE);
+        actual.getSide(Sides.RIGHT).flip(Direction.CLOCKWISE);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testC() {
+        expected.getSide(Sides.TOP).flip(Direction.CLOCKWISE);
+        actual.getSide(Sides.TOP).flip(Direction.CONTRACLOCKWISE);
+        actual.getSide(Sides.TOP).flip(Direction.CONTRACLOCKWISE);
+        actual.getSide(Sides.TOP).flip(Direction.CONTRACLOCKWISE);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testA() {
+        expected.turnCubeBackward();
+        expected.getSide(Sides.BOTTOM).flipMiddleLine(true);
+        System.out.println(expected);
+        actual.turnCubeForward();
+        actual.turnCubeForward();
+        actual.turnCubeForward();
+        actual.getSide(Sides.BOTTOM).flipMiddleLine(true);
+        System.out.println(actual);
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void testB() {
+        expected.getSide(Sides.BACKWARD).flipCubeAround();
+        System.out.println(expected);
+        actual.turnCubeVertical(Direction.CONTRACLOCKWISE);
+        System.out.println(actual);
         assertEquals(expected, actual);
     }
 }
