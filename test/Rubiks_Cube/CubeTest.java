@@ -87,5 +87,6 @@ public class CubeTest {
         actual.turnCubeVertical(Direction.CONTRACLOCKWISE);
         System.out.println(actual);
         assertEquals(expected, actual);
+
     }
 }
